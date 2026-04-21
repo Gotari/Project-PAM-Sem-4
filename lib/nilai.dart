@@ -128,7 +128,7 @@ class _NilaiPageState extends State<NilaiPage> {
                         const CircleAvatar(
                           radius: 16,
                           backgroundImage:
-                              AssetImage('assets/user_avatar.png'),
+                              AssetImage('assets/user_avatar.jpg'),
                           backgroundColor: Colors.white30,
                           child: Icon(Icons.person, color: Colors.white),
                         ),

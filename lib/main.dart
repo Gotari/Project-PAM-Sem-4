@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'tugas1.dart';
+import 'package:m05/dashboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: TasksScreen(),
+      home: Dashboard(),
     );
   }
 }

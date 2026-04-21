@@ -31,7 +31,12 @@ class TasksScreen extends StatefulWidget {
 
 class _TasksScreenState extends State<TasksScreen> {
   String selectedTab = 'Semua';
-  final List<String> tabs = ['Semua', 'Belum Dikerjakan', 'Sedang Dikerjakan', 'Selesai'];
+  final List<String> tabs = [
+    'Semua',
+    'Belum Dikerjakan',
+    'Sedang Dikerjakan',
+    'Selesai',
+  ];
 
   final List<Task> tasks = [
     Task(
@@ -84,10 +89,7 @@ class _TasksScreenState extends State<TasksScreen> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Colors.deepPurple.shade400,
-              Colors.deepPurple.shade600,
-            ],
+            colors: [Colors.deepPurple.shade400, Colors.deepPurple.shade600],
           ),
         ),
         child: SingleChildScrollView(
@@ -100,7 +102,13 @@ class _TasksScreenState extends State<TasksScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(Icons.arrow_back, color: Colors.white),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(Icons.arrow_back, color: Colors.white),
+                    ),
+
                     const Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -114,16 +122,17 @@ class _TasksScreenState extends State<TasksScreen> {
                         ),
                         Text(
                           'Kelola dan pantau semua tugas kuliahmu',
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 12,
-                          ),
+                          style: TextStyle(color: Colors.white70, fontSize: 12),
                         ),
                       ],
                     ),
                     Stack(
                       children: [
-                        const Icon(Icons.notifications, color: Colors.white, size: 28),
+                        const Icon(
+                          Icons.notifications,
+                          color: Colors.white,
+                          size: 28,
+                        ),
                         Positioned(
                           right: 0,
                           top: 0,
@@ -161,7 +170,10 @@ class _TasksScreenState extends State<TasksScreen> {
                         decoration: InputDecoration(
                           hintText: 'Cari tugas, mata kuliah, atau deadline...',
                           hintStyle: const TextStyle(color: Colors.grey),
-                          prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                          ),
                           filled: true,
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
@@ -178,7 +190,10 @@ class _TasksScreenState extends State<TasksScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: IconButton(
-                        icon: const Icon(Icons.filter_list, color: Colors.deepPurple),
+                        icon: const Icon(
+                          Icons.filter_list,
+                          color: Colors.deepPurple,
+                        ),
                         onPressed: () {},
                       ),
                     ),
@@ -202,7 +217,10 @@ class _TasksScreenState extends State<TasksScreen> {
                         },
                         child: Container(
                           margin: const EdgeInsets.only(right: 8),
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
                           decoration: BoxDecoration(
                             color: isSelected ? Colors.white : Colors.white24,
                             borderRadius: BorderRadius.circular(20),
@@ -210,8 +228,12 @@ class _TasksScreenState extends State<TasksScreen> {
                           child: Text(
                             tab,
                             style: TextStyle(
-                              color: isSelected ? Colors.deepPurple : Colors.white,
-                              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                              color: isSelected
+                                  ? Colors.deepPurple
+                                  : Colors.white,
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
                             ),
                           ),
                         ),
@@ -230,11 +252,26 @@ class _TasksScreenState extends State<TasksScreen> {
                     children: [
                       _buildStatCard('Total Tugas', '12', Icons.task_alt),
                       const SizedBox(width: 12),
-                      _buildStatCard('Deadline\nMinggu ini', '4', Icons.calendar_today, color: Colors.orange),
+                      _buildStatCard(
+                        'Deadline\nMinggu ini',
+                        '4',
+                        Icons.calendar_today,
+                        color: Colors.orange,
+                      ),
                       const SizedBox(width: 12),
-                      _buildStatCard('Sudah Selesai', '7', Icons.check_circle, color: Colors.green),
+                      _buildStatCard(
+                        'Sudah Selesai',
+                        '7',
+                        Icons.check_circle,
+                        color: Colors.green,
+                      ),
                       const SizedBox(width: 12),
-                      _buildStatCard('Terlambat', '1', Icons.cancel, color: Colors.red),
+                      _buildStatCard(
+                        'Terlambat',
+                        '1',
+                        Icons.cancel,
+                        color: Colors.red,
+                      ),
                     ],
                   ),
                 ),
@@ -357,8 +394,12 @@ class _TasksScreenState extends State<TasksScreen> {
     );
   }
 
-  Widget _buildStatCard(String label, String value, IconData icon,
-      {Color color = Colors.blue}) {
+  Widget _buildStatCard(
+    String label,
+    String value,
+    IconData icon, {
+    Color color = Colors.blue,
+  }) {
     return Container(
       width: 100,
       padding: const EdgeInsets.all(12),
@@ -382,10 +423,7 @@ class _TasksScreenState extends State<TasksScreen> {
           Text(
             label,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 10,
-              color: Colors.grey,
-            ),
+            style: const TextStyle(fontSize: 10, color: Colors.grey),
           ),
         ],
       ),
@@ -455,7 +493,10 @@ class _TasksScreenState extends State<TasksScreen> {
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: _getStatusColor(task.status).withOpacity(0.2),
                       borderRadius: BorderRadius.circular(4),
@@ -473,10 +514,7 @@ class _TasksScreenState extends State<TasksScreen> {
               ),
               Text(
                 '${task.dueDate} • ${task.dueTime}',
-                style: const TextStyle(
-                  fontSize: 11,
-                  color: Colors.grey,
-                ),
+                style: const TextStyle(fontSize: 11, color: Colors.grey),
               ),
             ],
           ),

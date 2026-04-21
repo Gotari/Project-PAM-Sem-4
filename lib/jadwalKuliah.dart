@@ -82,7 +82,7 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                         ),
                         const CircleAvatar(
                           radius: 20,
-                          backgroundImage: AssetImage('assets/user_avatar.png'),
+                          backgroundImage: AssetImage('assets/user_avatar.jpg'),
                           backgroundColor: Colors.white30,
                           child: Icon(Icons.person, color: Colors.white),
                         ),
