@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:m05/halamanTugas.dart';
 
 class Task {
   final String subject;
@@ -250,27 +251,71 @@ class _TasksScreenState extends State<TasksScreen> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      _buildStatCard('Total Tugas', '12', Icons.task_alt),
-                      const SizedBox(width: 12),
-                      _buildStatCard(
-                        'Deadline\nMinggu ini',
-                        '4',
-                        Icons.calendar_today,
-                        color: Colors.orange,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HalamanTugas(),
+                            ),
+                          );
+                        },
+                        child: _buildStatCard(
+                          'Total\nTugas',
+                          '12',
+                          Icons.task_alt,
+                        ),
                       ),
                       const SizedBox(width: 12),
-                      _buildStatCard(
-                        'Sudah Selesai',
-                        '7',
-                        Icons.check_circle,
-                        color: Colors.green,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HalamanTugas(),
+                            ),
+                          );
+                        },
+                        child: _buildStatCard(
+                          'Deadline\nMinggu ini',
+                          '4',
+                          Icons.calendar_today,
+                          color: Colors.orange,
+                        ),
                       ),
                       const SizedBox(width: 12),
-                      _buildStatCard(
-                        'Terlambat',
-                        '1',
-                        Icons.cancel,
-                        color: Colors.red,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HalamanTugas(),
+                            ),
+                          );
+                        },
+                        child: _buildStatCard(
+                          'Sudah\nSelesai',
+                          '7',
+                          Icons.check_circle,
+                          color: Colors.green,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HalamanTugas(),
+                            ),
+                          );
+                        },
+                        child: _buildStatCard(
+                          'Terlambat',
+                          '1',
+                          Icons.cancel,
+                          color: Colors.red,
+                        ),
                       ),
                     ],
                   ),
@@ -402,6 +447,7 @@ class _TasksScreenState extends State<TasksScreen> {
   }) {
     return Container(
       width: 100,
+      height: 120,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.95),

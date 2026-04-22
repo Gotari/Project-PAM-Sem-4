@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:m05/profil.dart';
 
 class JadwalKuliah extends StatefulWidget {
   const JadwalKuliah({Key? key}) : super(key: key);
@@ -69,8 +70,11 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                       children: [
                         GestureDetector(
                           onTap: () => Navigator.pop(context),
-                          child: const Icon(Icons.arrow_back,
-                              color: Colors.white, size: 28),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                            size: 28,
+                          ),
                         ),
                         const Text(
                           'Jadwal Kuliah',
@@ -80,11 +84,21 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const CircleAvatar(
-                          radius: 20,
-                          backgroundImage: AssetImage('assets/user_avatar.jpg'),
-                          backgroundColor: Colors.white30,
-                          child: Icon(Icons.person, color: Colors.white),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Profil()),
+                            );
+                          },
+                          child: const CircleAvatar(
+                            radius: 20,
+                            backgroundImage: AssetImage(
+                              'assets/user_avatar.jpg',
+                            ),
+                            backgroundColor: Colors.white30,
+                            child: Icon(Icons.person, color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
@@ -103,12 +117,20 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                           hintText: 'search',
                           hintStyle: TextStyle(color: Colors.grey[400]),
                           border: InputBorder.none,
-                          prefixIcon: const Icon(Icons.search,
-                              color: Colors.grey, size: 20),
-                          suffixIcon: const Icon(Icons.search,
-                              color: Colors.grey, size: 20),
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                            size: 20,
+                          ),
+                          suffixIcon: const Icon(
+                            Icons.search,
+                            color: Colors.grey,
+                            size: 20,
+                          ),
                           contentPadding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 15),
+                            vertical: 12,
+                            horizontal: 15,
+                          ),
                         ),
                       ),
                     ),
@@ -135,11 +157,11 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 14, vertical: 10),
+                          horizontal: 14,
+                          vertical: 10,
+                        ),
                         decoration: BoxDecoration(
-                          color: isSelected
-                              ? Colors.purple[400]
-                              : Colors.white,
+                          color: isSelected ? Colors.purple[400] : Colors.white,
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
                             color: isSelected
@@ -179,7 +201,9 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 8),
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
                           decoration: BoxDecoration(
                             color: isSelected
                                 ? Colors.purple[400]
@@ -206,7 +230,9 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                   const Spacer(),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 6),
+                      horizontal: 10,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(20),
@@ -272,8 +298,11 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                                 const SizedBox(height: 6),
                                 Row(
                                   children: [
-                                    Icon(Icons.access_time,
-                                        size: 14, color: Colors.grey[600]),
+                                    Icon(
+                                      Icons.access_time,
+                                      size: 14,
+                                      color: Colors.grey[600],
+                                    ),
                                     const SizedBox(width: 5),
                                     Text(
                                       schedule['time'],
@@ -287,8 +316,11 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                                 const SizedBox(height: 4),
                                 Row(
                                   children: [
-                                    Icon(Icons.location_on,
-                                        size: 14, color: Colors.grey[600]),
+                                    Icon(
+                                      Icons.location_on,
+                                      size: 14,
+                                      color: Colors.grey[600],
+                                    ),
                                     const SizedBox(width: 5),
                                     Text(
                                       schedule['location'],
@@ -312,7 +344,9 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.purple[400],
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 12, vertical: 6),
+                                    horizontal: 12,
+                                    vertical: 6,
+                                  ),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -332,11 +366,15 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 12, vertical: 6),
+                                    horizontal: 12,
+                                    vertical: 6,
+                                  ),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     side: const BorderSide(
-                                        color: Colors.purple, width: 1),
+                                      color: Colors.purple,
+                                      width: 1,
+                                    ),
                                   ),
                                 ),
                                 child: const Text(

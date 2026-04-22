@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:m05/PembayaranUKT.dart';
 import 'package:m05/Pengumuman.dart';
+import 'package:m05/halamanTugas.dart';
 import 'package:m05/jadwalKuliah.dart';
 import 'package:m05/nilai.dart';
+import 'package:m05/profil.dart';
 import 'package:m05/tugas1.dart';
 
 class Dashboard extends StatefulWidget {
@@ -60,8 +62,32 @@ class _DashboardState extends State<Dashboard> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Profil()),
+                        );
+                      },
+                      child: CircleAvatar(
+                        radius: 25,
+                        backgroundImage: AssetImage('assets/user_avatar.jpg'),
+                        backgroundColor: Colors.white30,
+                        child: Icon(Icons.person, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
               // Main Content
+              const SizedBox(height: 12),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
@@ -311,8 +337,13 @@ class _DashboardState extends State<Dashboard> {
                         padding: const EdgeInsets.all(15),
 
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             // IPK and SKS row
+                            Text(
+                              'Ringkasan Akademik',
+                              style: TextStyle(color: Colors.white),
+                            ),
                             Row(
                               children: [
                                 Expanded(

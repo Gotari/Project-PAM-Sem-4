@@ -73,6 +73,7 @@ class _ProfilState extends State<Profil> {
                   ],
                 ),
               ),
+              const SizedBox(height: 35),
               // User Card
               Transform.translate(
                 offset: const Offset(0, -50),
@@ -98,7 +99,7 @@ class _ProfilState extends State<Profil> {
                           radius: 50,
                           backgroundColor: Colors.grey[300],
                           backgroundImage: const AssetImage(
-                            'assets/user_avatar.png',
+                            'assets/user_avatar.jpg',
                           ),
                           child: Icon(
                             Icons.person,

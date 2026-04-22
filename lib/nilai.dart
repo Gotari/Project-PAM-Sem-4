@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:m05/profil.dart';
 
 class NilaiPage extends StatefulWidget {
   const NilaiPage({Key? key}) : super(key: key);
@@ -96,14 +97,21 @@ class _NilaiPageState extends State<NilaiPage> {
                   ),
                 ),
                 padding: const EdgeInsets.only(
-                    top: 20, bottom: 20, left: 15, right: 15),
+                  top: 20,
+                  bottom: 20,
+                  left: 15,
+                  right: 15,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
-                      child: const Icon(Icons.arrow_back,
-                          color: Colors.white, size: 28),
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 28,
+                      ),
                     ),
                     const Text(
                       'Nilai',
@@ -121,16 +129,28 @@ class _NilaiPageState extends State<NilaiPage> {
                             borderRadius: BorderRadius.circular(50),
                           ),
                           padding: const EdgeInsets.all(8),
-                          child: const Icon(Icons.notifications,
-                              color: Colors.white, size: 20),
+                          child: const Icon(
+                            Icons.notifications,
+                            color: Colors.white,
+                            size: 20,
+                          ),
                         ),
                         const SizedBox(width: 12),
-                        const CircleAvatar(
-                          radius: 16,
-                          backgroundImage:
-                              AssetImage('assets/user_avatar.jpg'),
-                          backgroundColor: Colors.white30,
-                          child: Icon(Icons.person, color: Colors.white),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Profil()),
+                            );
+                          },
+                          child: CircleAvatar(
+                            radius: 16,
+                            backgroundImage: AssetImage(
+                              'assets/user_avatar.jpg',
+                            ),
+                            backgroundColor: Colors.white30,
+                            child: Icon(Icons.person, color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
@@ -164,7 +184,9 @@ class _NilaiPageState extends State<NilaiPage> {
                           // Title
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
+                              horizontal: 15,
+                              vertical: 10,
+                            ),
                             decoration: BoxDecoration(
                               color: Colors.purple[400],
                               borderRadius: BorderRadius.circular(12),
@@ -269,8 +291,9 @@ class _NilaiPageState extends State<NilaiPage> {
                                     });
                                   },
                                   child: Container(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 8),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 8,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: selectedTab == 'Ringkasan'
                                           ? Colors.white
@@ -305,8 +328,9 @@ class _NilaiPageState extends State<NilaiPage> {
                                     });
                                   },
                                   child: Container(
-                                    padding:
-                                        const EdgeInsets.symmetric(vertical: 8),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 8,
+                                    ),
                                     decoration: BoxDecoration(
                                       color: selectedTab == 'Detail Nilai'
                                           ? Colors.purple[400]
@@ -351,12 +375,18 @@ class _NilaiPageState extends State<NilaiPage> {
                               decoration: InputDecoration(
                                 hintText: 'Cari Mata Kuliah',
                                 hintStyle: TextStyle(
-                                    color: Colors.grey[400], fontSize: 12),
+                                  color: Colors.grey[400],
+                                  fontSize: 12,
+                                ),
                                 border: InputBorder.none,
-                                prefixIcon: Icon(Icons.search,
-                                    color: Colors.grey[400], size: 18),
-                                contentPadding:
-                                    const EdgeInsets.symmetric(vertical: 12),
+                                prefixIcon: Icon(
+                                  Icons.search,
+                                  color: Colors.grey[400],
+                                  size: 18,
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
                               ),
                             ),
                           ),
@@ -368,8 +398,11 @@ class _NilaiPageState extends State<NilaiPage> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           padding: const EdgeInsets.all(12),
-                          child: Icon(Icons.tune,
-                              color: Colors.grey[600], size: 20),
+                          child: Icon(
+                            Icons.tune,
+                            color: Colors.grey[600],
+                            size: 20,
+                          ),
                         ),
                       ],
                     ),
@@ -444,7 +477,9 @@ class _NilaiPageState extends State<NilaiPage> {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 8),
+                                  horizontal: 12,
+                                  vertical: 8,
+                                ),
                                 child: Row(
                                   children: [
                                     Text(
@@ -461,8 +496,7 @@ class _NilaiPageState extends State<NilaiPage> {
                                       height: 24,
                                       decoration: BoxDecoration(
                                         color: course['color'],
-                                        borderRadius:
-                                            BorderRadius.circular(6),
+                                        borderRadius: BorderRadius.circular(6),
                                       ),
                                       child: Center(
                                         child: Text(
@@ -564,12 +598,13 @@ class _NilaiPageState extends State<NilaiPage> {
                                 ),
                                 Container(
                                   decoration: BoxDecoration(
-                                    color:
-                                        course['color'].withOpacity(0.2),
+                                    color: course['color'].withOpacity(0.2),
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 12, vertical: 8),
+                                    horizontal: 12,
+                                    vertical: 8,
+                                  ),
                                   child: Row(
                                     children: [
                                       Text(
@@ -586,8 +621,9 @@ class _NilaiPageState extends State<NilaiPage> {
                                         height: 24,
                                         decoration: BoxDecoration(
                                           color: course['color'],
-                                          borderRadius:
-                                              BorderRadius.circular(6),
+                                          borderRadius: BorderRadius.circular(
+                                            6,
+                                          ),
                                         ),
                                         child: Center(
                                           child: Text(
