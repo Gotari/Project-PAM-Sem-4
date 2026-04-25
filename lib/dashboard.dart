@@ -56,7 +56,7 @@ class _DashboardState extends State<Dashboard> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.purple[300]!, Colors.purple[100]!],
+            colors: [const Color.fromARGB(255, 212, 187, 255), const Color.fromARGB(255, 187, 212, 255), const Color.fromARGB(255, 229, 219, 255)],
           ),
         ),
         child: SingleChildScrollView(
@@ -97,9 +97,9 @@ class _DashboardState extends State<Dashboard> {
                     Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Colors.blue[400]!, Colors.blue[600]!],
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [Colors.blueAccent, Colors.indigo, Colors.deepPurple],
                         ),
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
@@ -323,7 +323,7 @@ class _DashboardState extends State<Dashboard> {
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
-                            colors: [Colors.blue[400]!, Colors.purple[400]!],
+                            colors: [Colors.deepPurple, Colors.indigo, Colors.blueAccent, Colors.indigo],
                           ),
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [

@@ -108,11 +108,15 @@ class _PengumumanState extends State<Pengumuman> {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [Colors.purple[400]!, Colors.purple[600]!],
+                    colors: [Colors.deepPurple, Colors.deepPurpleAccent],
                   ),
                 ),
                 padding: const EdgeInsets.only(
-                    top: 20, bottom: 20, left: 15, right: 15),
+                  top: 20,
+                  bottom: 20,
+                  left: 15,
+                  right: 15,
+                ),
                 child: Column(
                   children: [
                     // Title row
@@ -121,8 +125,11 @@ class _PengumumanState extends State<Pengumuman> {
                       children: [
                         GestureDetector(
                           onTap: () => Navigator.pop(context),
-                          child: const Icon(Icons.arrow_back,
-                              color: Colors.white, size: 28),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                            size: 28,
+                          ),
                         ),
                         const Text(
                           'Pengumuman',
@@ -140,14 +147,18 @@ class _PengumumanState extends State<Pengumuman> {
                                 borderRadius: BorderRadius.circular(50),
                               ),
                               padding: const EdgeInsets.all(8),
-                              child: const Icon(Icons.notifications,
-                                  color: Colors.white, size: 18),
+                              child: const Icon(
+                                Icons.notifications,
+                                color: Colors.white,
+                                size: 18,
+                              ),
                             ),
                             const SizedBox(width: 12),
                             const CircleAvatar(
                               radius: 16,
-                              backgroundImage:
-                                  AssetImage('assets/user_avatar.jpg'),
+                              backgroundImage: AssetImage(
+                                'assets/user_avatar.jpg',
+                              ),
                               backgroundColor: Colors.white30,
                               child: Icon(Icons.person, color: Colors.white),
                             ),
@@ -157,120 +168,122 @@ class _PengumumanState extends State<Pengumuman> {
                     ),
                     const SizedBox(height: 15),
                     // Search and Filter row
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: TextField(
-                              controller: searchController,
-                              decoration: InputDecoration(
-                                hintText: 'Cari pengumuman...',
-                                hintStyle: TextStyle(
-                                    color: Colors.grey[400], fontSize: 13),
-                                border: InputBorder.none,
-                                prefixIcon: Icon(Icons.search,
-                                    color: Colors.grey[400], size: 18),
-                                contentPadding:
-                                    const EdgeInsets.symmetric(vertical: 12),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.purple[300],
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          padding: const EdgeInsets.all(12),
-                          child: const Icon(Icons.tune,
-                              color: Colors.white, size: 20),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 15),
-              // Main Content
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Important Announcement Banner
                     Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.all(18),
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
-                          colors: [Colors.purple[400]!, Colors.purple[500]!],
+                          colors: [Colors.deepPurple, Colors.deepPurpleAccent],
                         ),
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(22),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
+                            color: Colors.deepPurple.withOpacity(0.3),
                             blurRadius: 10,
-                            offset: const Offset(0, 4),
+                            offset: Offset(0, 5),
                           ),
                         ],
                       ),
-                      padding: const EdgeInsets.all(15),
-                      child: Row(
+
+                      child: Column(
                         children: [
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Icon(Icons.notifications_active,
-                                color: Colors.white, size: 28),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Pengumuman Penting!',
-                                  style: TextStyle(
+                          // SEARCH
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  decoration: BoxDecoration(
                                     color: Colors.white,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.bold,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      hintText: 'Cari pengumuman...',
+                                      border: InputBorder.none,
+                                      prefixIcon: Icon(Icons.search),
+                                    ),
                                   ),
                                 ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  'Pastikan kamu tidak melewatkan informasi penting dari kampus.',
-                                  style: TextStyle(
-                                    color: Colors.white.withOpacity(0.9),
-                                    fontSize: 11,
+                              ),
+
+                              SizedBox(width: 10),
+
+                              Container(
+                                padding: EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: Colors.white24,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Icon(Icons.tune, color: Colors.white),
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(height: 20),
+
+                          // PENGUMUMAN PENTING
+                          Container(
+                            padding: EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.15),
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.notifications_active,
+                                  color: Colors.white,
+                                  size: 28,
+                                ),
+
+                                SizedBox(width: 12),
+
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Pengumuman Penting!',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+
+                                      SizedBox(height: 4),
+
+                                      Text(
+                                        'Pastikan kamu tidak melewatkan informasi penting dari kampus.',
+                                        style: TextStyle(
+                                          color: Colors.white70,
+                                          fontSize: 11,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                    vertical: 7,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Text(
+                                    'Lihat Semua',
+                                    style: TextStyle(
+                                      color: Colors.deepPurple,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ],
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: const Text(
-                              'Lihat Semua',
-                              style: TextStyle(
-                                color: Colors.purple,
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
-                              ),
                             ),
                           ),
                         ],
@@ -278,182 +291,159 @@ class _PengumumanState extends State<Pengumuman> {
                     ),
                     const SizedBox(height: 20),
                     // Category Filter
-                    SizedBox(
-                      height: 40,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: categories.map((category) {
-                          bool isSelected = selectedCategory == category;
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedCategory = category;
-                                });
-                              },
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 15,
+                      ),
+                      padding: const EdgeInsets.all(18),
+
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25),
+
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.08),
+                            blurRadius: 12,
+                            offset: Offset(0, 5),
+                          ),
+                        ],
+                      ),
+
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // CATEGORY FILTER
+                          SizedBox(
+                            height: 40,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: categories.map((category) {
+                                bool isSelected = selectedCategory == category;
+
+                                return Padding(
+                                  padding: EdgeInsets.only(right: 10),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        selectedCategory = category;
+                                      });
+                                    },
+
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 16,
+                                        vertical: 8,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? Colors.deepPurple
+                                            : Colors.grey.shade100,
+
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+
+                                      child: Text(
+                                        category,
+                                        style: TextStyle(
+                                          color: isSelected
+                                              ? Colors.white
+                                              : Colors.black87,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+
+                          SizedBox(height: 20),
+                          if (selectedCategory == 'Semua' &&
+                              filteredAnnouncements.any(
+                                (item) => item['isNew'],
+                              ))
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.deepPurple,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                "Baru",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+
+                          SizedBox(height: 15),
+
+                          ...filteredAnnouncements.map((announcement) {
+                            return Padding(
+                              padding: EdgeInsets.only(bottom: 12),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
+                                padding: EdgeInsets.all(14),
                                 decoration: BoxDecoration(
-                                  color: isSelected
-                                      ? Colors.purple[400]
-                                      : Colors.white,
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(
-                                    color: isSelected
-                                        ? Colors.purple[400]!
-                                        : Colors.grey[300]!,
-                                  ),
+                                  color: Colors.grey.shade50,
+                                  borderRadius: BorderRadius.circular(18),
                                 ),
-                                child: Center(
-                                  child: Text(
-                                    category,
-                                    style: TextStyle(
-                                      color: isSelected
-                                          ? Colors.white
-                                          : Colors.black,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    // New Badge and List
-                    if (filteredAnnouncements.any((item) => item['isNew']))
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.purple[400],
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: const Text(
-                            'Baru',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 11,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    // Announcements List
-                    ...filteredAnnouncements.map((announcement) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
-                                blurRadius: 8,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          padding: const EdgeInsets.all(12),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // Icon
-                              Container(
-                                width: 45,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  color: announcement['categoryColor']
-                                      .withOpacity(0.2),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Icon(
-                                  announcement['icon'],
-                                  color: announcement['categoryColor'],
-                                  size: 24,
-                                ),
-                              ),
-                              const SizedBox(width: 12),
-                              // Content
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                                child: Row(
                                   children: [
-                                    Text(
-                                      announcement['title'],
-                                      style: const TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                    Container(
+                                      width: 45,
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                        color: announcement['categoryColor']
+                                            .withOpacity(.2),
+
+                                        borderRadius: BorderRadius.circular(12),
                                       ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: 6),
-                                    Text(
-                                      announcement['description'],
-                                      style: TextStyle(
-                                        fontSize: 11,
-                                        color: Colors.grey[600],
+
+                                      child: Icon(
+                                        announcement['icon'],
+                                        color: announcement['categoryColor'],
                                       ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    const SizedBox(height: 8),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8, vertical: 4),
-                                          decoration: BoxDecoration(
-                                            color: announcement['categoryColor']
-                                                .withOpacity(0.15),
-                                            borderRadius:
-                                                BorderRadius.circular(12),
-                                          ),
-                                          child: Text(
-                                            announcement['category'],
+
+                                    SizedBox(width: 12),
+
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            announcement['title'],
                                             style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w600,
-                                              color: announcement[
-                                                  'categoryColor'],
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          '• ${announcement['date']}',
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            color: Colors.grey[500],
+
+                                          SizedBox(height: 5),
+
+                                          Text(
+                                            announcement['description'],
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
-                              const SizedBox(width: 8),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                size: 14,
-                                color: Colors.grey[400],
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                    const SizedBox(height: 20),
+                            );
+                          }).toList(),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

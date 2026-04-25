@@ -81,7 +81,7 @@ class _NilaiPageState extends State<NilaiPage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.purple[300]!, Colors.purple[100]!],
+            colors: [Colors.deepPurple, const Color.fromARGB(255, 168, 216, 255)],
           ),
         ),
         child: SingleChildScrollView(
@@ -89,13 +89,6 @@ class _NilaiPageState extends State<NilaiPage> {
             children: [
               // Header
               Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [Colors.purple[400]!, Colors.purple[600]!],
-                  ),
-                ),
                 padding: const EdgeInsets.only(
                   top: 20,
                   bottom: 20,
