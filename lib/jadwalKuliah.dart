@@ -13,7 +13,6 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
   String selectedTime = 'Semua';
 
   final List<String> days = ['Sen', 'Sel', 'Rab', 'Kam', 'Jun', 'Sab', 'Min'];
-  final List<String> times = ['Semua', 'Hari ini', 'Minggu ini'];
 
   final List<Map<String, dynamic>> schedules = [
     {
@@ -109,49 +108,13 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  // Search Bar
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'search',
-                          hintStyle: TextStyle(color: Colors.grey[400]),
-                          border: InputBorder.none,
-                          prefixIcon: const Icon(
-                            Icons.search,
-                            color: Colors.grey,
-                            size: 20,
-                          ),
-                          suffixIcon: const Icon(
-                            Icons.search,
-                            color: Colors.grey,
-                            size: 20,
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            vertical: 12,
-                            horizontal: 15,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
             // Day filter buttons
             Expanded(
               child: Container(
-                margin: const EdgeInsets.fromLTRB(
-                  15,
-                  0,
-                  15,
-                100,
-                ),
+                margin: const EdgeInsets.fromLTRB(15, 0, 15, 100),
                 padding: const EdgeInsets.all(15),
 
                 decoration: BoxDecoration(
@@ -204,46 +167,6 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                     ),
 
                     SizedBox(height: 15),
-
-                    // TIME FILTER
-                    Row(
-                      children: [
-                        ...times.map((time) {
-                          bool isSelected = selectedTime == time;
-
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedTime = time;
-                                });
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 8,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: isSelected
-                                      ? Colors.purple[400]
-                                      : Colors.white.withOpacity(0.8),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Text(
-                                  time,
-                                  style: TextStyle(
-                                    color: isSelected
-                                        ? Colors.white
-                                        : Colors.black,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                      ],
-                    ),
 
                     SizedBox(height: 20),
 
@@ -343,59 +266,7 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                                   // Action buttons
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {},
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.purple[400],
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 12,
-                                            vertical: 6,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              8,
-                                            ),
-                                          ),
-                                        ),
-                                        child: const Text(
-                                          'Masuk',
-                                          style: TextStyle(
-                                            fontSize: 11,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 6),
-                                      ElevatedButton(
-                                        onPressed: () {},
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.white,
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 12,
-                                            vertical: 6,
-                                          ),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                              8,
-                                            ),
-                                            side: const BorderSide(
-                                              color: Colors.purple,
-                                              width: 1,
-                                            ),
-                                          ),
-                                        ),
-                                        child: const Text(
-                                          'Detail',
-                                          style: TextStyle(
-                                            fontSize: 11,
-                                            color: Colors.purple,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    children: [const SizedBox(height: 6)],
                                   ),
                                 ],
                               ),
