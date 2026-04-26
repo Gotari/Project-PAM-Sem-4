@@ -282,11 +282,6 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.blue[400],
-        child: const Icon(Icons.add, color: Colors.white, size: 28),
-      ),
     );
   }
 }
