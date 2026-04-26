@@ -81,7 +81,10 @@ class _NilaiPageState extends State<NilaiPage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.deepPurple, const Color.fromARGB(255, 168, 216, 255)],
+            colors: [
+              Colors.deepPurple,
+              const Color.fromARGB(255, 168, 216, 255),
+            ],
           ),
         ),
         child: SingleChildScrollView(
@@ -267,85 +270,6 @@ class _NilaiPageState extends State<NilaiPage> {
                                         ),
                                       ),
                                     ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 15),
-                          // Tab Buttons
-                          Row(
-                            children: [
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedTab = 'Ringkasan';
-                                    });
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 8,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: selectedTab == 'Ringkasan'
-                                          ? Colors.white
-                                          : Colors.transparent,
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(
-                                        color: Colors.grey[300]!,
-                                        width: 1,
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'Ringkasan',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600,
-                                          color: selectedTab == 'Ringkasan'
-                                              ? Colors.black
-                                              : Colors.grey[600],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedTab = 'Detail Nilai';
-                                    });
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 8,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: selectedTab == 'Detail Nilai'
-                                          ? Colors.purple[400]
-                                          : Colors.transparent,
-                                      borderRadius: BorderRadius.circular(20),
-                                      border: Border.all(
-                                        color: Colors.grey[300]!,
-                                        width: 1,
-                                      ),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'Detail Nilai',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600,
-                                          color: selectedTab == 'Detail Nilai'
-                                              ? Colors.white
-                                              : Colors.grey[600],
-                                        ),
-                                      ),
-                                    ),
                                   ),
                                 ),
                               ),

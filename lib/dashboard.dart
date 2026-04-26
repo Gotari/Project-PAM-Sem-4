@@ -56,7 +56,11 @@ class _DashboardState extends State<Dashboard> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [const Color.fromARGB(255, 212, 187, 255), const Color.fromARGB(255, 187, 212, 255), const Color.fromARGB(255, 229, 219, 255)],
+            colors: [
+              const Color.fromARGB(255, 212, 187, 255),
+              const Color.fromARGB(255, 187, 212, 255),
+              const Color.fromARGB(255, 229, 219, 255),
+            ],
           ),
         ),
         child: SingleChildScrollView(
@@ -99,7 +103,11 @@ class _DashboardState extends State<Dashboard> {
                         gradient: LinearGradient(
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
-                          colors: [Colors.blueAccent, Colors.indigo, Colors.deepPurple],
+                          colors: [
+                            Colors.blueAccent,
+                            Colors.indigo,
+                            Colors.deepPurple,
+                          ],
                         ),
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
@@ -278,32 +286,37 @@ class _DashboardState extends State<Dashboard> {
                                 );
                               }
                             },
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: 50,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: item['color'].withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(12),
+                            child: SizedBox(
+                              width: 55,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 50,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: item['color'].withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Icon(
+                                      item['icon'],
+                                      color: item['color'],
+                                      size: 24,
+                                    ),
                                   ),
-                                  child: Icon(
-                                    item['icon'],
-                                    color: item['color'],
-                                    size: 24,
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    item['label'],
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  item['label'],
-                                  style: const TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         }).toList(),
@@ -323,7 +336,12 @@ class _DashboardState extends State<Dashboard> {
                           gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
-                            colors: [Colors.deepPurple, Colors.indigo, Colors.blueAccent, Colors.indigo],
+                            colors: [
+                              Colors.deepPurple,
+                              Colors.indigo,
+                              Colors.blueAccent,
+                              Colors.indigo,
+                            ],
                           ),
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [

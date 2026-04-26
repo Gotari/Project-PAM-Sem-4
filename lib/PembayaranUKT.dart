@@ -44,9 +44,10 @@ class _PembayaranUKTState extends State<PembayaranUKT> {
               // Header
               Container(
                 decoration: BoxDecoration(color: Colors.deepPurple),
+                width: double.infinity,
                 padding: const EdgeInsets.only(
                   top: 20,
-                  bottom: 20,
+                  bottom: 15,
                   left: 15,
                   right: 15,
                 ),
@@ -89,17 +90,17 @@ class _PembayaranUKTState extends State<PembayaranUKT> {
                 ),
               ),
               // Illustration area
-              const SizedBox(height: 20),
               Container(
                 height: 180,
+                width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
                     image: AssetImage('assets/Pembayaran.png'),
+                    fit: BoxFit.cover
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10,),
               // Main Content
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),

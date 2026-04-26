@@ -108,7 +108,7 @@ class _PengumumanState extends State<Pengumuman> {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [Colors.deepPurple, Colors.deepPurpleAccent],
+                    colors: [Colors.deepPurple, Colors.indigo, Colors.purple],
                   ),
                 ),
                 padding: const EdgeInsets.only(
@@ -172,11 +172,7 @@ class _PengumumanState extends State<Pengumuman> {
                       margin: const EdgeInsets.symmetric(horizontal: 15),
                       padding: const EdgeInsets.all(18),
                       decoration: BoxDecoration(
-                        gradient: const LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Colors.deepPurple, Colors.deepPurpleAccent],
-                        ),
+                        color: Colors.deepPurpleAccent,
                         borderRadius: BorderRadius.circular(22),
                         boxShadow: [
                           BoxShadow(
