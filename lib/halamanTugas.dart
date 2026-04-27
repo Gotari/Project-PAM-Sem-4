@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HalamanTugas extends StatefulWidget {
-  const HalamanTugas({Key? key}) : super(key: key);
+  const HalamanTugas({super.key});
 
   @override
   State<HalamanTugas> createState() => _HalamanTugasState();
@@ -94,35 +94,7 @@ class _HalamanTugasState extends State<HalamanTugas> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Row(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              padding: const EdgeInsets.all(8),
-                              child: const Icon(
-                                Icons.settings,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              padding: const EdgeInsets.all(8),
-                              child: const Icon(
-                                Icons.more_vert,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ),
-                          ],
-                        ),
+                        Row(children: [const SizedBox(width: 10)]),
                       ],
                     ),
                     // Filter buttons
@@ -134,8 +106,8 @@ class _HalamanTugasState extends State<HalamanTugas> {
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.8), 
-                    borderRadius: BorderRadius.circular(50)
+                    color: Colors.white.withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(50),
                   ),
                   padding: const EdgeInsets.all(20),
                   child: Column(
@@ -335,7 +307,7 @@ class _HalamanTugasState extends State<HalamanTugas> {
                             ),
                           ),
                         );
-                      }).toList(),
+                      }),
                       const SizedBox(height: 30),
                     ],
                   ),
@@ -344,11 +316,6 @@ class _HalamanTugasState extends State<HalamanTugas> {
             ],
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.blue[400],
-        child: const Icon(Icons.add, color: Colors.white, size: 28),
       ),
     );
   }
