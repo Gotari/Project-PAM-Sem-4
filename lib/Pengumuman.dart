@@ -165,10 +165,13 @@ class _PengumumanState extends State<Pengumuman> {
                         ),
                       ],
                     ),
+<<<<<<< HEAD
                     const SizedBox(height: 15),
 
                     // Search and Filter row
                     const SizedBox(height: 20),
+=======
+>>>>>>> 23e02e3 (gabungkan pengumuman)
                     // Category Filter
                     Container(
                       margin: const EdgeInsets.symmetric(
@@ -237,7 +240,10 @@ class _PengumumanState extends State<Pengumuman> {
                               }).toList(),
                             ),
                           ),
+<<<<<<< HEAD
 
+=======
+>>>>>>> 23e02e3 (gabungkan pengumuman)
                           SizedBox(height: 15),
 
                           ...filteredAnnouncements.map((announcement) {
