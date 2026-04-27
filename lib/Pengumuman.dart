@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:m05/profil.dart';
 
 class Pengumuman extends StatefulWidget {
-  const Pengumuman({Key? key}) : super(key: key);
+  const Pengumuman({super.key});
 
   @override
   State<Pengumuman> createState() => _PengumumanState();
@@ -108,7 +109,7 @@ class _PengumumanState extends State<Pengumuman> {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [Colors.deepPurple, Colors.indigo, Colors.purple],
+                    colors: [Colors.deepPurple, Colors.deepPurpleAccent],
                   ),
                 ),
                 padding: const EdgeInsets.only(
@@ -141,150 +142,32 @@ class _PengumumanState extends State<Pengumuman> {
                         ),
                         Row(
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              padding: const EdgeInsets.all(8),
-                              child: const Icon(
-                                Icons.notifications,
-                                color: Colors.white,
-                                size: 18,
-                              ),
-                            ),
                             const SizedBox(width: 12),
-                            const CircleAvatar(
-                              radius: 16,
-                              backgroundImage: AssetImage(
-                                'assets/user_avatar.jpg',
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Profil(),
+                                  ),
+                                );
+                              },
+                              child: const CircleAvatar(
+                                radius: 20,
+                                backgroundImage: AssetImage(
+                                  'assets/user_avatar.jpg',
+                                ),
+                                backgroundColor: Colors.white30,
+                                child: Icon(Icons.person, color: Colors.white),
                               ),
-                              backgroundColor: Colors.white30,
-                              child: Icon(Icons.person, color: Colors.white),
                             ),
                           ],
                         ),
                       ],
                     ),
                     const SizedBox(height: 15),
+
                     // Search and Filter row
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
-                      padding: const EdgeInsets.all(18),
-                      decoration: BoxDecoration(
-                        color: Colors.deepPurpleAccent,
-                        borderRadius: BorderRadius.circular(22),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.deepPurple.withOpacity(0.3),
-                            blurRadius: 10,
-                            offset: Offset(0, 5),
-                          ),
-                        ],
-                      ),
-
-                      child: Column(
-                        children: [
-                          // SEARCH
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(25),
-                                  ),
-                                  child: TextField(
-                                    decoration: InputDecoration(
-                                      hintText: 'Cari pengumuman...',
-                                      border: InputBorder.none,
-                                      prefixIcon: Icon(Icons.search),
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-                              SizedBox(width: 10),
-
-                              Container(
-                                padding: EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  color: Colors.white24,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Icon(Icons.tune, color: Colors.white),
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(height: 20),
-
-                          // PENGUMUMAN PENTING
-                          Container(
-                            padding: EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.15),
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.notifications_active,
-                                  color: Colors.white,
-                                  size: 28,
-                                ),
-
-                                SizedBox(width: 12),
-
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Pengumuman Penting!',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-
-                                      SizedBox(height: 4),
-
-                                      Text(
-                                        'Pastikan kamu tidak melewatkan informasi penting dari kampus.',
-                                        style: TextStyle(
-                                          color: Colors.white70,
-                                          fontSize: 11,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 12,
-                                    vertical: 7,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Text(
-                                    'Lihat Semua',
-                                    style: TextStyle(
-                                      color: Colors.deepPurple,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     const SizedBox(height: 20),
                     // Category Filter
                     Container(
@@ -355,29 +238,6 @@ class _PengumumanState extends State<Pengumuman> {
                             ),
                           ),
 
-                          SizedBox(height: 20),
-                          if (selectedCategory == 'Semua' &&
-                              filteredAnnouncements.any(
-                                (item) => item['isNew'],
-                              ))
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 6,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.deepPurple,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Text(
-                                "Baru",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-
                           SizedBox(height: 15),
 
                           ...filteredAnnouncements.map((announcement) {
@@ -436,7 +296,7 @@ class _PengumumanState extends State<Pengumuman> {
                                 ),
                               ),
                             );
-                          }).toList(),
+                          }),
                         ],
                       ),
                     ),
