@@ -133,11 +133,6 @@ class _TasksScreenState extends State<TasksScreen> {
                     ),
                     Stack(
                       children: [
-                        const Icon(
-                          Icons.notifications,
-                          color: Colors.white,
-                          size: 28,
-                        ),
                         Positioned(
                           right: 0,
                           top: 0,
@@ -165,46 +160,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   ],
                 ),
               ),
-              // Search Bar
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Cari tugas, mata kuliah, atau deadline...',
-                          hintStyle: const TextStyle(color: Colors.grey),
-                          prefixIcon: const Icon(
-                            Icons.search,
-                            color: Colors.grey,
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.filter_list,
-                          color: Colors.deepPurple,
-                        ),
-                        onPressed: () {},
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+
               const SizedBox(height: 16),
               // Tabs
               SingleChildScrollView(
@@ -449,11 +405,6 @@ class _TasksScreenState extends State<TasksScreen> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.deepPurple.shade400,
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
     );
   }
 
@@ -542,12 +493,6 @@ class _TasksScreenState extends State<TasksScreen> {
                   ],
                 ),
               ),
-              PopupMenuButton(
-                itemBuilder: (context) => [
-                  const PopupMenuItem(child: Text('Edit')),
-                  const PopupMenuItem(child: Text('Delete')),
-                ],
-              ),
             ],
           ),
           const SizedBox(height: 8),
@@ -630,6 +575,7 @@ class _TasksScreenState extends State<TasksScreen> {
     }
   }
 }
+
 class GradientProgressPainter extends CustomPainter {
   final double progress;
 
@@ -639,51 +585,30 @@ class GradientProgressPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     double stroke = 10;
 
-    Offset center = Offset(
-      size.width/2,
-      size.height/2,
-    );
+    Offset center = Offset(size.width / 2, size.height / 2);
 
-    double radius =
-        (size.width/2) - stroke;
+    double radius = (size.width / 2) - stroke;
 
     Paint backgroundPaint = Paint()
       ..color = Colors.grey.shade200
       ..style = PaintingStyle.stroke
       ..strokeWidth = stroke;
 
-    canvas.drawCircle(
-      center,
-      radius,
-      backgroundPaint,
-    );
+    canvas.drawCircle(center, radius, backgroundPaint);
 
-    Rect rect = Rect.fromCircle(
-      center: center,
-      radius: radius,
-    );
+    Rect rect = Rect.fromCircle(center: center, radius: radius);
 
     Paint progressPaint = Paint()
       ..shader = LinearGradient(
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
-        colors: [
-          Colors.blue,
-          Colors.deepPurple,
-          Colors.purpleAccent,
-        ],
+        colors: [Colors.blue, Colors.deepPurple, Colors.purpleAccent],
       ).createShader(rect)
       ..style = PaintingStyle.stroke
       ..strokeWidth = stroke
       ..strokeCap = StrokeCap.round;
 
-    canvas.drawArc(
-      rect,
-      -1.57,
-      6.28 * progress,
-      false,
-      progressPaint,
-    );
+    canvas.drawArc(rect, -1.57, 6.28 * progress, false, progressPaint);
   }
 
   @override
