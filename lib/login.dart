@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:m05/dashboard.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,7 +40,9 @@ class LoginPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(height: 10),
-              const Icon(Icons.shield, size: 50, color: Colors.white),
+              Image.asset('assets/logo.png',
+              width: 150,
+              height: 150,),
               const SizedBox(height: 10),
               const Text(
                 "Campus App",
@@ -98,19 +101,27 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 20),
 
               // Login Button
-              Container(
-                width: double.infinity,
-                height: 45,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF5C6BC0), Color(0xFF7E57C2)],
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Dashboard()),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 45,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF5C6BC0), Color(0xFF7E57C2)],
+                    ),
                   ),
-                ),
-                child: const Center(
-                  child: Text(
-                    "Login",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  child: const Center(
+                    child: Text(
+                      "Login",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
                   ),
                 ),
               ),
