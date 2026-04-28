@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:m05/halamanTugas.dart';
+import 'package:m05/profil.dart';
 
 class Task {
   final String subject;
@@ -131,80 +132,24 @@ class _TasksScreenState extends State<TasksScreen> {
                         ),
                       ],
                     ),
-                    Stack(
-                      children: [
-                        const Icon(
-                          Icons.notifications,
-                          color: Colors.white,
-                          size: 28,
-                        ),
-                        Positioned(
-                          right: 0,
-                          top: 0,
-                          child: Container(
-                            width: 16,
-                            height: 16,
-                            decoration: const BoxDecoration(
-                              color: Colors.redAccent,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Center(
-                              child: Text(
-                                '2',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              // Search Bar
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Cari tugas, mata kuliah, atau deadline...',
-                          hintStyle: const TextStyle(color: Colors.grey),
-                          prefixIcon: const Icon(
-                            Icons.search,
-                            color: Colors.grey,
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.filter_list,
-                          color: Colors.deepPurple,
-                        ),
-                        onPressed: () {},
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Profil()),
+                        );
+                      },
+                      child: CircleAvatar(
+                        radius: 25,
+                        backgroundImage: AssetImage('assets/user_avatar.jpg'),
+                        backgroundColor: Colors.white30,
+                        child: Icon(Icons.person, color: Colors.white),
                       ),
                     ),
                   ],
                 ),
               ),
+
               const SizedBox(height: 16),
               // Tabs
               SingleChildScrollView(
@@ -343,44 +288,17 @@ class _TasksScreenState extends State<TasksScreen> {
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            SizedBox(
-                              width: 90,
-                              height: 90,
-                              child: SizedBox(
-                                width: 90,
-                                height: 90,
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    CustomPaint(
-                                      size: Size(90, 90),
-                                      painter: GradientProgressPainter(0.583),
-                                    ),
-
-                                    Text(
-                                      '7/12',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.deepPurple,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            CustomPaint(
+                              size: const Size(90, 90),
+                              painter: GradientProgressPainter(0.583),
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '7/12',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.deepPurple.shade400,
-                                  ),
-                                ),
-                              ],
+                            const Text(
+                              '7/12',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.deepPurple,
+                              ),
                             ),
                           ],
                         ),
@@ -630,6 +548,7 @@ class _TasksScreenState extends State<TasksScreen> {
     }
   }
 }
+
 class GradientProgressPainter extends CustomPainter {
   final double progress;
 
@@ -639,51 +558,30 @@ class GradientProgressPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     double stroke = 10;
 
-    Offset center = Offset(
-      size.width/2,
-      size.height/2,
-    );
+    Offset center = Offset(size.width / 2, size.height / 2);
 
-    double radius =
-        (size.width/2) - stroke;
+    double radius = (size.width / 2) - stroke;
 
     Paint backgroundPaint = Paint()
       ..color = Colors.grey.shade200
       ..style = PaintingStyle.stroke
       ..strokeWidth = stroke;
 
-    canvas.drawCircle(
-      center,
-      radius,
-      backgroundPaint,
-    );
+    canvas.drawCircle(center, radius, backgroundPaint);
 
-    Rect rect = Rect.fromCircle(
-      center: center,
-      radius: radius,
-    );
+    Rect rect = Rect.fromCircle(center: center, radius: radius);
 
     Paint progressPaint = Paint()
       ..shader = LinearGradient(
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,
-        colors: [
-          Colors.blue,
-          Colors.deepPurple,
-          Colors.purpleAccent,
-        ],
+        colors: [Colors.blue, Colors.deepPurple, Colors.purpleAccent],
       ).createShader(rect)
       ..style = PaintingStyle.stroke
       ..strokeWidth = stroke
       ..strokeCap = StrokeCap.round;
 
-    canvas.drawArc(
-      rect,
-      -1.57,
-      6.28 * progress,
-      false,
-      progressPaint,
-    );
+    canvas.drawArc(rect, -1.57, 6.28 * progress, false, progressPaint);
   }
 
   @override
