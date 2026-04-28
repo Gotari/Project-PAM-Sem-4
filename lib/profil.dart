@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:m05/about.dart';
+import 'package:m05/editProfil.dart';
+import 'package:m05/login.dart';
+import 'package:m05/notifikasi.dart';
+import 'package:m05/riwayatPembayaran.dart';
 
 class Profil extends StatefulWidget {
-  const Profil({super.key});
+  const Profil({Key? key}) : super(key: key);
 
   @override
   State<Profil> createState() => _ProfilState();
 }
 
 class _ProfilState extends State<Profil> {
+  String namaUser = "Bryan Lauda";
   final List<Map<String, dynamic>> menuItems = [
     {'icon': Icons.edit, 'title': 'Edit Profil'},
-    {'icon': Icons.lock, 'title': 'Ganti Password'},
-    {'icon': Icons.school, 'title': 'Riwayat Akademik'},
     {'icon': Icons.receipt, 'title': 'Riwayat Pembayaran'},
     {'icon': Icons.notifications, 'title': 'Notifikasi'},
-    {'icon': Icons.settings, 'title': 'Pengaturan'},
     {'icon': Icons.info, 'title': 'About'},
   ];
 
@@ -53,6 +56,15 @@ class _ProfilState extends State<Profil> {
                         color: Colors.white,
                         size: 28,
                       ),
+                    ),
+
+                    Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Icon(Icons.notifications, color: Colors.white),
                     ),
                   ],
                 ),
@@ -120,7 +132,7 @@ class _ProfilState extends State<Profil> {
                               SizedBox(height: 15),
 
                               Text(
-                                "Bryan Lauda",
+                                namaUser,
                                 style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
@@ -146,46 +158,88 @@ class _ProfilState extends State<Profil> {
                         ...menuItems.map((item) {
                           return Padding(
                             padding: EdgeInsets.only(bottom: 12),
-                            child: Container(
-                              padding: EdgeInsets.all(15),
-
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 40,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      color: Colors.purple[100],
-                                      borderRadius: BorderRadius.circular(10),
+                            child: GestureDetector(
+                              onTap: () async {
+                                if (item['title'] == 'Edit Profil') {
+                                  final namaBaru = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          EditProfilPage(namaLama: namaUser),
                                     ),
-                                    child: Icon(
-                                      item['icon'],
-                                      color: Colors.deepPurple,
+                                  );
+
+                                  if (namaBaru != null &&
+                                      namaBaru.toString().isNotEmpty) {
+                                    setState(() {
+                                      namaUser = namaBaru;
+                                    });
+                                  }
+                                } else if (item['title'] ==
+                                    'Riwayat Pembayaran') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => RiwayatPembayaran(),
                                     ),
-                                  ),
+                                  );
+                                } else if (item['title'] == 'Notifikasi') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => NotifikasiPage(),
+                                    ),
+                                  );
+                                } else if (item['title'] == 'About') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AboutPage(),
+                                    ),
+                                  );
+                                }
+                              },
 
-                                  SizedBox(width: 15),
+                              child: Container(
+                                padding: EdgeInsets.all(15),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
 
-                                  Expanded(
-                                    child: Text(
-                                      item['title'],
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w600,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        color: Colors.purple[100],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Icon(
+                                        item['icon'],
+                                        color: Colors.deepPurple,
                                       ),
                                     ),
-                                  ),
 
-                                  Icon(Icons.arrow_forward_ios, size: 16),
-                                ],
+                                    SizedBox(width: 15),
+
+                                    Expanded(
+                                      child: Text(
+                                        item['title'],
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+
+                                    Icon(Icons.arrow_forward_ios, size: 16),
+                                  ],
+                                ),
                               ),
                             ),
                           );
-                        }),
+                        }).toList(),
 
                         SizedBox(height: 20),
 
@@ -193,7 +247,14 @@ class _ProfilState extends State<Profil> {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginPage(),
+                                ),
+                              );
+                            },
 
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
