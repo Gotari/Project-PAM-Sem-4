@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:m05/dashboard.dart';
+import 'package:m05/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +18,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  bool isHover = false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +48,7 @@ class LoginPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               const SizedBox(height: 10),
-              Image.asset('assets/logo.png',
-              width: 150,
-              height: 150,),
+              Image.asset('assets/logo.png', width: 150, height: 150),
               const SizedBox(height: 10),
               const Text(
                 "Campus App",
@@ -127,8 +133,34 @@ class LoginPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 15),
-
-              const Text("Belum punya akun?"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Belum punya akun?"),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegisterPage()),
+                      );
+                    },
+                    child: MouseRegion(
+                      onEnter: (_) => setState(() => isHover = true),
+                      onExit: (_) => setState(() => isHover = false),
+                      child: Text(
+                        'Daftar Sekarang',
+                        style: TextStyle(
+                          color: isHover ? Colors.deepPurple : Colors.blue,
+                          decoration: isHover
+                              ? TextDecoration.underline
+                              : TextDecoration.none,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               const SizedBox(height: 5),
               const Text("Atau login dengan"),
 
