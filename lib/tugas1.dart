@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:m05/db/database_helper.dart';
 import 'package:m05/halamanTugas.dart';
 import 'package:m05/profil.dart';
 
@@ -40,47 +41,249 @@ class _TasksScreenState extends State<TasksScreen> {
     'Selesai',
   ];
 
-  final List<Task> tasks = [
-    Task(
-      subject: 'Pemrograman Mobile',
-      title: 'Buat UI Login Flutter',
-      status: 'Sedang Dikerjakan',
-      dueDate: '18 April 2026',
-      dueTime: '10:00',
-      progress: 0.6,
-      icon: Icons.phone_android,
-      color: const Color(0xFFFF9D5C),
-    ),
-    Task(
-      subject: 'Basis Data',
-      title: 'ERD Sistem Perpustakaan',
-      status: 'Belum Dikerjakan',
-      dueDate: 'Belum',
-      dueTime: '23:59',
-      progress: null,
-      icon: Icons.storage,
-      color: const Color(0xFFF8B4D4),
-    ),
-    Task(
-      subject: 'Jaringan Komputer',
-      title: 'Laporan Topologi LAN',
-      status: 'Selesai',
-      dueDate: '22 April 2026',
-      dueTime: '14:00',
-      progress: null,
-      icon: Icons.computer,
-      color: const Color(0xFFB4E7F8),
-    ),
-    Task(
-      subject: 'Kecerdasan Buatan',
-      title: 'Ringkasan Jurnal AI',
-      status: 'Belum Dikerjakan',
-      dueDate: '',
-      dueTime: '',
-      progress: null,
-      icon: Icons.psychology,
-      color: const Color(0xFFC9B4F8),
-    ),
+void showProgressDialog(Map<String, dynamic> task) {
+  TextEditingController progressController =
+      TextEditingController(
+        text: ((task['progress'] ?? 0) * 100).toInt().toString(),
+      );
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text("Masukkan Progress (%)"),
+        content: TextField(
+          controller: progressController,
+          keyboardType: TextInputType.number,
+          decoration: const InputDecoration(
+            hintText: "1 - 99",
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Batal"),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              int persen = int.tryParse(progressController.text) ?? 0;
+
+              if (persen < 1) persen = 1;
+              if (persen > 99) persen = 99;
+
+              setState(() {
+                int index = tasks.indexWhere(
+                  (e) => e['id'] == task['id'],
+                );
+
+                tasks[index]['status'] = "Sedang Dikerjakan";
+                tasks[index]['progress'] = persen / 100;
+              });
+              Navigator.pop(context);
+
+              await DatabaseHelper.instance.updateStatus(
+                task['id'],
+                "Sedang Dikerjakan",
+              );
+            },
+            child: const Text("Simpan"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void showTambahTugasDialog() {
+  final subjectController = TextEditingController();
+  final titleController = TextEditingController();
+  final dueDateController = TextEditingController();
+  final dueTimeController = TextEditingController();
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text("Tambah Tugas"),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: subjectController,
+                decoration: const InputDecoration(
+                  labelText: "Mata Kuliah",
+                ),
+              ),
+              TextField(
+                controller: titleController,
+                decoration: const InputDecoration(
+                  labelText: "Judul Tugas",
+                ),
+              ),
+              TextField(
+                controller: dueDateController,
+                decoration: const InputDecoration(
+                  labelText: "Tanggal Deadline",
+                ),
+              ),
+              TextField(
+                controller: dueTimeController,
+                decoration: const InputDecoration(
+                  labelText: "Jam Deadline",
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Batal"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              tambahTugas(
+                subjectController.text,
+                titleController.text,
+                dueDateController.text,
+                dueTimeController.text,
+              );
+
+              Navigator.pop(context);
+            },
+            child: const Text("Tambah"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void tambahTugas(
+  String subject,
+  String title,
+  String dueDate,
+  String dueTime,
+) {
+  if (subject.isEmpty || title.isEmpty) return;
+
+  setState(() {
+    tasks.add({
+      'id': DateTime.now().millisecondsSinceEpoch,
+      'subject': subject,
+      'title': title,
+      'status': 'Belum Dikerjakan',
+      'dueDate': dueDate,
+      'dueTime': dueTime,
+      'progress': null,
+      'icon': Icons.assignment,
+      'color': const Color(0xFFC9B4F8),
+    });
+  });
+}
+
+Future<void> hapusTugas(int id) async {
+  setState(() {
+    tasks.removeWhere((task) => task['id'] == id);
+  });
+
+  await DatabaseHelper.instance.deleteTugas(id);
+}
+
+Future<void> updateStatusTugas(int id, String status) async {
+  setState(() {
+    final index = tasks.indexWhere((task) => task['id'] == id);
+    if (index != -1) {
+      tasks[index]['status'] = status;
+    }
+  });
+
+  await DatabaseHelper.instance.updateStatus(id, status);
+}
+
+void showEditStatusDialog(Map<String, dynamic> task) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text("Update Status"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              title: const Text("Belum Dikerjakan"),
+              onTap: () async {
+                Navigator.pop(context);
+                await updateStatusTugas(task['id'], "Belum Dikerjakan");
+              },
+            ),
+            ListTile(
+              title: const Text("Sedang Dikerjakan"),
+              onTap: () {
+                Navigator.pop(context);
+                showProgressDialog(task);
+              },
+            ),
+            ListTile(
+              title: const Text("Selesai"),
+              onTap: () async {
+                Navigator.pop(context);
+                await updateStatusTugas(task['id'], "Selesai");
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+  List<Map<String,dynamic>> tasks = [
+    {
+      'id': 1,
+      'subject': 'Pemrograman Mobile',
+      'title': 'Buat UI Login Flutter',
+      'status': 'Sedang Dikerjakan',
+      'dueDate': '18 April 2026',
+      'dueTime': '10:00',
+      'progress': 0.6,
+      'icon': Icons.phone_android,
+      'color': const Color(0xFFFF9D5C),
+},
+    {
+      'id': 2,
+      'subject': 'Basis Data',
+      'title': 'ERD Sistem Perpustakaan',
+      'status': 'Belum Dikerjakan',
+      'dueDate': 'Belum',
+      'dueTime': '23:59',
+      'progress': null,
+      'icon': Icons.storage,
+      'color': const Color(0xFFF8B4D4),
+    },
+    {
+      'id': 3,
+      'subject': 'Jaringan Komputer',
+      'title': 'Laporan Topologi LAN',
+      'status': 'Selesai',
+      'dueDate': '22 April 2026',
+      'dueTime': '14:00',
+      'progress': null,
+      'icon': Icons.computer,
+      'color': const Color(0xFFB4E7F8),
+    },
+    {
+      'id': 4,
+      'subject': 'Kecerdasan Buatan',
+      'title': 'Ringkasan Jurnal AI',
+      'status': 'Belum Dikerjakan',
+      'dueDate': '',
+      'dueTime': '',
+      'progress': null,
+      'icon': Icons.psychology,
+      'color': const Color(0xFFC9B4F8),
+    },
   ];
 
   @override
@@ -369,7 +572,9 @@ class _TasksScreenState extends State<TasksScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.deepPurple.shade400,
-        onPressed: () {},
+        onPressed: () {
+          showTambahTugasDialog();
+        },
         child: const Icon(Icons.add),
       ),
     );
@@ -412,7 +617,7 @@ class _TasksScreenState extends State<TasksScreen> {
     );
   }
 
-  Widget _buildTaskCard(Task task) {
+  Widget _buildTaskCard(Map<String, dynamic> task) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
@@ -430,10 +635,10 @@ class _TasksScreenState extends State<TasksScreen> {
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: task.color.withOpacity(0.3),
+                  color: task['color'].withOpacity(0.3),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(task.icon, color: task.color, size: 28),
+                child: Icon(task['icon'], color: task['color'], size: 28),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -441,7 +646,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      task.subject,
+                      task['subject'],
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.orange,
@@ -450,7 +655,7 @@ class _TasksScreenState extends State<TasksScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      task.title,
+                      task['title'],
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -461,9 +666,16 @@ class _TasksScreenState extends State<TasksScreen> {
                 ),
               ),
               PopupMenuButton(
+                onSelected: (value) {
+                  if (value == 'edit') {
+                    showEditStatusDialog(task);
+                  } else if (value == 'delete') {
+                    hapusTugas(task['id']);
+                  }
+                },
                 itemBuilder: (context) => [
-                  const PopupMenuItem(child: Text('Edit')),
-                  const PopupMenuItem(child: Text('Delete')),
+                  const PopupMenuItem(value: 'edit',child: Text('Edit')),
+                  const PopupMenuItem(value: 'delete',child: Text('Delete')),
                 ],
               ),
             ],
@@ -480,14 +692,14 @@ class _TasksScreenState extends State<TasksScreen> {
                       vertical: 4,
                     ),
                     decoration: BoxDecoration(
-                      color: _getStatusColor(task.status).withOpacity(0.2),
+                      color: _getStatusColor(task['status']).withOpacity(0.2),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
-                      task.status,
+                      task['status'],
                       style: TextStyle(
                         fontSize: 11,
-                        color: _getStatusColor(task.status),
+                        color: _getStatusColor(task['status']),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -495,12 +707,12 @@ class _TasksScreenState extends State<TasksScreen> {
                 ],
               ),
               Text(
-                '${task.dueDate} • ${task.dueTime}',
+                '${task['dueDate']} • ${task['dueTime']}',
                 style: const TextStyle(fontSize: 11, color: Colors.grey),
               ),
             ],
           ),
-          if (task.progress != null) ...[
+          if (task['progress'] != null) ...[
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -509,7 +721,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(4),
                     child: LinearProgressIndicator(
-                      value: task.progress,
+                      value: task['progress'],
                       minHeight: 6,
                       backgroundColor: Colors.grey.shade200,
                       valueColor: AlwaysStoppedAnimation<Color>(
@@ -520,7 +732,7 @@ class _TasksScreenState extends State<TasksScreen> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  '${(task.progress! * 100).toInt()}%',
+                  '${(task['progress']! * 100).toInt()}%',
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,

@@ -165,13 +165,10 @@ class _PengumumanState extends State<Pengumuman> {
                         ),
                       ],
                     ),
-<<<<<<< HEAD
                     const SizedBox(height: 15),
 
                     // Search and Filter row
                     const SizedBox(height: 20),
-=======
->>>>>>> 23e02e3 (gabungkan pengumuman)
                     // Category Filter
                     Container(
                       margin: const EdgeInsets.symmetric(
@@ -240,11 +237,8 @@ class _PengumumanState extends State<Pengumuman> {
                               }).toList(),
                             ),
                           ),
-<<<<<<< HEAD
 
-=======
->>>>>>> 23e02e3 (gabungkan pengumuman)
-                          SizedBox(height: 15),
+                          const SizedBox(height: 15),
 
                           ...filteredAnnouncements.map((announcement) {
                             return Padding(
@@ -255,7 +249,6 @@ class _PengumumanState extends State<Pengumuman> {
                                   color: Colors.grey.shade50,
                                   borderRadius: BorderRadius.circular(18),
                                 ),
-
                                 child: Row(
                                   children: [
                                     Container(
@@ -264,10 +257,8 @@ class _PengumumanState extends State<Pengumuman> {
                                       decoration: BoxDecoration(
                                         color: announcement['categoryColor']
                                             .withOpacity(.2),
-
                                         borderRadius: BorderRadius.circular(12),
                                       ),
-
                                       child: Icon(
                                         announcement['icon'],
                                         color: announcement['categoryColor'],
@@ -287,9 +278,7 @@ class _PengumumanState extends State<Pengumuman> {
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
-
                                           SizedBox(height: 5),
-
                                           Text(
                                             announcement['description'],
                                             maxLines: 2,
@@ -302,7 +291,7 @@ class _PengumumanState extends State<Pengumuman> {
                                 ),
                               ),
                             );
-                          }),
+                          }).toList(),
                         ],
                       ),
                     ),
