@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:m05/dashboard.dart';
 import 'package:m05/register.dart';
+import 'package:m05/services/auth_services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +28,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool isHover = false;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +77,7 @@ class _LoginPageState extends State<LoginPage> {
 
               // Email
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.email),
                   hintText: "Email",
@@ -90,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
 
               // Password
               TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.lock),
@@ -108,11 +113,27 @@ class _LoginPageState extends State<LoginPage> {
 
               // Login Button
               GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Dashboard()),
-                  );
+                onTap: () async {
+                  if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Email dan Password Wajib diisi")),
+                    );
+                    return;
+                  }
+                  try {
+                    await AuthService().login(
+                      emailController.text.trim(),
+                      passwordController.text.trim(),
+                    );
+
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Dashboard()),
+                    );
+                  } catch (e) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text("Login gagal: $e")));
+                  }
                 },
                 child: Container(
                   width: double.infinity,
