@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:m05/dashboard.dart';
+import 'package:m05/services/auth_services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +17,24 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +84,7 @@ class RegisterPage extends StatelessWidget {
 
               // Email
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.email),
                   hintText: "Email",
@@ -84,6 +101,7 @@ class RegisterPage extends StatelessWidget {
 
               // Password
               TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.lock),
@@ -102,11 +120,13 @@ class RegisterPage extends StatelessWidget {
 
               // Register Button
               GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Dashboard()),
-                  );
+                onTap: () async {
+                  try {
+                    await AuthService().register(emailController.text.trim(), passwordController.text.trim(),);
+                    Navigator.pop(context);
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Register gagal: $e")),);
+                  }
                 },
                 child: Container(
                   width: double.infinity,

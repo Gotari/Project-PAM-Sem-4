@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "891317652376",
+    "project_id": "project-uas-pam-cd642",
+    "storage_bucket": "project-uas-pam-cd642.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891317652376:android:3208a37f1bf0159078b9ed",
+        "android_client_info": {
+          "package_name": "com.example.m05"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu5k4JlDo6fs36ybRA7zONmeg3aTfOVkc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
